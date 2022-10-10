@@ -33,10 +33,10 @@ class DetailScreenItem extends StatelessWidget {
                 title:
                     'بعد الصلاة على النبي   لعشاق التميز 🤩 خاروف عمر 10شهور 🥰قاااااطع الوصف مكفول هداد ونطاحه 💯 نار حمرا 🔥 موجود في جنين المعنى على الرقم 0568573900📞🌹 💞'),
             ImageSlider(imgList: Images),
-            // Container(
-            //     constraints:
-            //         const BoxConstraints(minHeight: 100, maxHeight: 300),
-            //     child: const NetworkPlayerWidget())
+            Container(
+                constraints:
+                    const BoxConstraints(minHeight: 100, maxHeight: 300),
+                child: const NetworkPlayerWidget()),
             reactionItems()
           ],
         ),

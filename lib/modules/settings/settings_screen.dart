@@ -21,7 +21,7 @@ class SettingsScreen extends StatelessWidget {
           if (state.changePasswordModel.status!) {
             MotionToast.success(
               title: "Success",
-              titleStyle: TextStyle(fontWeight: FontWeight.bold),
+              titleStyle: const TextStyle(fontWeight: FontWeight.bold),
               description: state.changePasswordModel.message!,
               descriptionStyle: const TextStyle(
                   //overflow: TextOverflow.ellipsis,
@@ -78,35 +78,10 @@ class SettingsScreen extends StatelessWidget {
                     right: 10,
                   ),
                   child: InkWell(
-                    onTap: () {
-                      //   navigatorPush(context, ProfileScreen());
-                    },
-                    child: CircleAvatar(
-                      radius: 24,
-                      backgroundColor: indigo,
-                      child: CircleAvatar(
-                        backgroundColor: Colors.white,
-                        radius: 22.5,
-                        child: CachedNetworkImage(
-                          imageUrl:
-                              'https://upload.wikimedia.org/wikipedia/commons/f/f3/Zinedine_Zidane_by_Tasnim_03.jpg',
-                          placeholder: (context, url) => const Center(
-                              child: CircularProgressIndicator(
-                            strokeWidth: 1.5,
-                          )),
-                          errorWidget: (context, url, error) => Icon(
-                            Icons.error,
-                            color: indigo,
-                          ),
-                          imageBuilder: (context, imageProvider) =>
-                              CircleAvatar(
-                            backgroundImage: imageProvider,
-                            radius: 21,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
+                      onTap: () {
+                        //   navigatorPush(context, ProfileScreen());
+                      },
+                      child: myCircleAvatar('', 21, 25, 23)),
                 ),
               ],
             ),

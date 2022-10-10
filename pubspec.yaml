@@ -52,6 +52,7 @@ dependencies:
   chewie: ^1.3.5
   like_button: ^2.0.4
   cached_network_image: ^3.2.2
+  flutter_rating_bar: ^4.0.1
 
 dev_dependencies:
   flutter_test:
@@ -82,7 +83,7 @@ flutter:
   assets:
     - assets/images/
     - assets/lottiefiles/
-
+    - assets/video/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

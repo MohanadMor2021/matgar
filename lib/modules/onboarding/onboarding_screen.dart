@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:matgar/item/onboarding_screen_item/assest_player_video.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../shared/network/local/cache_helper.dart';
@@ -16,16 +17,16 @@ class BoardingModel {
 
 List<BoardingModel> boarding = [
   BoardingModel(
-      image: 'assets/images/firstborder.jpg',
+      image: '',
       title: 'تطبيق المواشي',
       body: ' تطبيق بيع وشراء للمواشي  الأول في الوطن العربي'),
   BoardingModel(
-      image: 'assets/images/firstborder.jpg',
+      image: '',
       title: 'تطبيق المواشي',
       body:
           '  قم الآن بعرض الماشية الخاصة بك بطريقة منظمة للزبائن والوصول لزبائن أكثر والمنافسة في السوق '),
   BoardingModel(
-      image: 'assets/images/firstborder.jpg',
+      image: '',
       title: 'تطبيق المواشي',
       body:
           ' ميزات كثيرة يحتويها التطبيق للمهتمين في بيع المواشي وشرائها قم الآن بتسجيل حسابك الخاص وكلمة المرور لمرة واحدة '),
@@ -52,13 +53,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         body: Stack(
           children: [
             SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-              child: SvgPicture.asset(
-                'assets/images/splash.svg',
-                fit: BoxFit.cover,
-              ),
-            ),
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height,
+                child: const AssestPlayerWidget()),
             Scaffold(
               backgroundColor: Colors.transparent,
               body: AnnotatedRegion<SystemUiOverlayStyle>(
@@ -120,7 +117,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                               dotWidth: 10,
                               expansionFactor: 4,
                               spacing: 5,
-                              activeDotColor: Colors.white,
+                              activeDotColor: Colors.green,
                             ),
                           ),
                         ),
@@ -138,29 +135,32 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                           curve: Curves.fastLinearToSlowEaseIn);
                                     },
                                     child: Container(
+                                      width: 100,
                                       decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(20),
                                           color: Colors.black),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: const [
-                                          Text(
-                                            'التالي',
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 22),
-                                          ),
-                                          Baseline(
-                                              baseline: 33,
-                                              baselineType:
-                                                  TextBaseline.alphabetic,
-                                              child: Icon(
-                                                Icons.arrow_forward,
-                                                color: Colors.white,
-                                                size: 30,
-                                              ))
-                                        ],
+                                      child: Center(
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: const [
+                                            Text(
+                                              'التالي',
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 22),
+                                            ),
+                                            Baseline(
+                                                baseline: 33,
+                                                baselineType:
+                                                    TextBaseline.alphabetic,
+                                                child: Icon(
+                                                  Icons.arrow_forward,
+                                                  color: Colors.white,
+                                                  size: 30,
+                                                ))
+                                          ],
+                                        ),
                                       ),
                                     )),
                               ),
@@ -172,29 +172,32 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                 child: TextButton(
                                     onPressed: submit,
                                     child: Container(
+                                      width: 100,
                                       decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(20),
                                           color: Colors.black),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: const [
-                                          Text(
-                                            'البدأ',
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 22),
-                                          ),
-                                          Baseline(
-                                              baseline: 33,
-                                              baselineType:
-                                                  TextBaseline.alphabetic,
-                                              child: Icon(
-                                                Icons.arrow_forward,
-                                                color: Colors.white,
-                                                size: 30,
-                                              ))
-                                        ],
+                                      child: Center(
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: const [
+                                            Text(
+                                              'البدأ',
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 22),
+                                            ),
+                                            Baseline(
+                                                baseline: 33,
+                                                baselineType:
+                                                    TextBaseline.alphabetic,
+                                                child: Icon(
+                                                  Icons.arrow_forward,
+                                                  color: Colors.white,
+                                                  size: 30,
+                                                ))
+                                          ],
+                                        ),
                                       ),
                                     )),
                               ),
@@ -213,34 +216,35 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   Widget buildBoardingItem(BoardingModel model) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 15.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Center(
-              child: Image.asset(
-            'assets/images/sheep.png',
-            width: 280,
-            height: 280,
-          )),
-          Center(
-            child: Text(
-              '${model.title}',
-              style: const TextStyle(
-                  color: Colors.white, fontWeight: FontWeight.bold),
-            ),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          Center(
-            child: Text(
-              '${model.body}',
-              style: const TextStyle(
-                color: Colors.white,
+      child: Padding(
+        padding: const EdgeInsets.only(top: 300),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Center(
+              child: Text(
+                '${model.title}',
+                style: const TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 25,
+                    letterSpacing: 2),
               ),
             ),
-          ),
-        ],
+            const SizedBox(
+              height: 10,
+            ),
+            Center(
+              child: Text(
+                '${model.body}',
+                style: const TextStyle(
+                  color: Colors.black,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

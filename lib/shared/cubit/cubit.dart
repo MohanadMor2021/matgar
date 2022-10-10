@@ -5,11 +5,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:matgar/layout/home_layout.dart';
+import 'package:matgar/modules/profile_other/profile_other.dart';
 import 'package:matgar/shared/cubit/states.dart';
 
 import '../../models/change_password_model.dart';
 import '../../models/home_model.dart';
 import '../../models/login_model.dart';
+import '../../modules/filters/country.dart';
 import '../../modules/home_screen/home_screen.dart';
 import '../../modules/settings/settings_screen.dart';
 import '../components/constants.dart';
@@ -72,7 +74,7 @@ class ShopCubit extends Cubit<ShopStates> {
   int bottomNavBarCurrentIndex = 0;
 
   List<Widget> bottomNavBarScreens = [
-    HomeScreen(),
+    country_Filter(),
     HomeScreen(),
     SettingsScreen(),
   ];

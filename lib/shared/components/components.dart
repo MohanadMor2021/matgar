@@ -1,7 +1,9 @@
 import 'dart:ffi';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:like_button/like_button.dart';
 
 import '../styles/icon_broken.dart';
@@ -408,5 +410,86 @@ Widget likeButton() {
       }
       return result;
     },
+  );
+}
+
+Widget myCircleAvatar(
+    String img, double radiusIn, double radiusOut, double borderraduis) {
+  return CircleAvatar(
+    radius: radiusOut,
+    backgroundColor: indigo,
+    child: CircleAvatar(
+      backgroundColor: Colors.white,
+      radius: borderraduis,
+      child: CachedNetworkImage(
+        imageUrl:
+            'https://upload.wikimedia.org/wikipedia/commons/f/f3/Zinedine_Zidane_by_Tasnim_03.jpg',
+        placeholder: (context, url) => const Center(
+            child: CircularProgressIndicator(
+          strokeWidth: 1.5,
+        )),
+        errorWidget: (context, url, error) => Icon(
+          Icons.error,
+          color: indigo,
+        ),
+        imageBuilder: (context, imageProvider) => CircleAvatar(
+          backgroundImage: imageProvider,
+          radius: radiusIn,
+        ),
+      ),
+    ),
+  );
+}
+
+Widget staticNames(String name) {
+  return Padding(
+    padding: const EdgeInsets.only(right: 20),
+    child: Text(
+      name,
+      style: const TextStyle(fontSize: 22, color: Colors.black),
+    ),
+  );
+}
+
+Widget myRating() {
+  return SizedBox(
+    width: 180,
+    child: RatingBar.builder(
+      initialRating: 3,
+      minRating: 1,
+      itemSize: 30.0,
+      direction: Axis.horizontal,
+      ignoreGestures: true,
+      itemCount: 5,
+      itemPadding: const EdgeInsets.symmetric(horizontal: 2),
+      itemBuilder: (context, _) => const Icon(
+        Icons.star,
+        color: Colors.amber,
+      ),
+      onRatingUpdate: (rating) {
+        print(rating);
+      },
+    ),
+  );
+}
+
+Widget ratingOther() {
+  return SizedBox(
+    width: 180,
+    child: RatingBar.builder(
+      initialRating: 3,
+      minRating: 1,
+      itemSize: 30.0,
+      direction: Axis.horizontal,
+      itemCount: 5,
+      itemPadding: const EdgeInsets.symmetric(horizontal: 2),
+      itemBuilder: (context, _) => const Icon(
+        Icons.star,
+        color: Colors.amber,
+      ),
+      onRatingUpdate: (rating) {
+        print(rating);
+      },
+    ),
   );
 }
