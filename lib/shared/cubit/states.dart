@@ -1,5 +1,7 @@
 import '../../models/change_password_model.dart';
+import '../../models/country_model.dart';
 import '../../models/login_model.dart';
+import '../../models/product_category.dart';
 
 abstract class ShopStates {}
 
@@ -190,4 +192,81 @@ class ChangeBottomNavState extends ShopStates {
   final index;
 
   ChangeBottomNavState(this.index);
+}
+
+//////////////////////// ads////////////////////
+
+class ShopLoadingAdsDataState extends ShopStates {}
+
+class ShopSuccessAdsDataState extends ShopStates {}
+
+class ShopErrorAdsDataState extends ShopStates {
+  final String error;
+
+  ShopErrorAdsDataState(this.error);
+}
+
+//////////////////////// Category////////////////////
+
+class ShopLoadingCategoryDataState extends ShopStates {}
+
+class ShopSuccessCategoryDataState extends ShopStates {}
+
+class ShopErrorCategoryDataState extends ShopStates {
+  final String error;
+
+  ShopErrorCategoryDataState(this.error);
+}
+
+//////////////ProductByCategoryModel
+class ShopLoadingProductByCategoryModelState extends ShopStates {
+  final List<Item3> oldPosts;
+  final bool isFirstFetch;
+
+  ShopLoadingProductByCategoryModelState(this.oldPosts,
+      {this.isFirstFetch = false});
+}
+
+class ShopSuccessProductByCategoryModelState extends ShopStates {
+  final List<Item3> posts;
+
+  ShopSuccessProductByCategoryModelState(this.posts);
+}
+
+class ShopErrorProductByCategoryModelState extends ShopStates {
+  final String error;
+
+  ShopErrorProductByCategoryModelState(this.error);
+}
+
+////////////// ProductDetailsModel
+class ShopLoadingProductDetailslState extends ShopStates {}
+
+class ShopSuccessProductDetailsState extends ShopStates {}
+
+class ShopErrorProductDetailsState extends ShopStates {
+  final String error;
+
+  ShopErrorProductDetailsState(this.error);
+}
+
+//////////////////////// Country////////////////////
+
+class ShopLoadingCountryDataState extends ShopStates {
+  final List<DataCountry> oldPosts;
+  final bool isFirstFetch;
+
+  ShopLoadingCountryDataState(this.oldPosts, {this.isFirstFetch = false});
+}
+
+class ShopSuccessCountryDataState extends ShopStates {
+  final List<DataCountry> posts;
+
+  ShopSuccessCountryDataState(this.posts);
+}
+
+class ShopErrorCountryDataState extends ShopStates {
+  final String error;
+
+  ShopErrorCountryDataState(this.error);
 }

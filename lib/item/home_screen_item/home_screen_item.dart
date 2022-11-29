@@ -1,103 +1,154 @@
 import 'package:flutter/material.dart';
-import 'package:matgar/modules/home_screen/details_screen.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:matgar/models/category_model.dart';
 import 'package:matgar/shared/components/components.dart';
 
-import '../../shared/styles/icon_broken.dart';
+import '../../dummy_data/categories_data.dart';
+import '../../modules/home_screen/products_screen.dart';
 
-// ignore: must_be_immutable
-class HomeScreenItem extends StatelessWidget {
-  String? title;
-  String? image;
-  String? subtitle;
-  String? content;
+class HomeScreenItem extends StatefulWidget {
+  final Item2 categories;
 
-  HomeScreenItem(
-      {super.key, this.title, this.image, this.subtitle, this.content});
+  HomeScreenItem(this.categories);
+
+  @override
+  State<HomeScreenItem> createState() => _HomeScreenItemState();
+}
+
+class _HomeScreenItemState extends State<HomeScreenItem> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        top: 15.0,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(
-            height: 5,
+    return InkWell(
+      onTap: () {
+        navigatorPush(context, ProductsScreen(widget.categories.id));
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        child: Container(
+          height: 100,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15),
+            border: Border.all(color: Colors.grey, width: 1),
           ),
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 11),
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey.shade200),
-              borderRadius: BorderRadius.circular(12),
-              color: Colors.white,
-            ),
-            width: MediaQuery.of(context).size.width,
-            // ignore: prefer_const_constructors
-            constraints: BoxConstraints(
-              minHeight: 100,
-              maxHeight: 150,
-            ),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                      margin: const EdgeInsets.only(left: 10),
-                      constraints:
-                          const BoxConstraints(minWidth: 100, maxWidth: 120),
-                      child: Image.asset(
-                        '$image',
-                        fit: BoxFit.contain,
-                      )),
-                  Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          title!,
-                          style: const TextStyle(
-                              color: Colors.black,
-                              overflow: TextOverflow.fade,
-                              fontWeight: FontWeight.normal,
-                              fontSize: 17),
-                        ),
-                        Text(
-                          subtitle!,
-                          style: const TextStyle(
-                              color: Colors.black,
-                              overflow: TextOverflow.ellipsis,
-                              fontWeight: FontWeight.normal,
-                              fontFamily: 'Roboto',
-                              fontSize: 11),
-                        ),
-                      ],
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      navigatorPush(context, const DetailsScreen());
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(6.0),
-                          color: Colors.grey.shade200),
-                      width: 50,
-                      height: 50,
-                      child: const Icon(
-                        IconBroken.Arrow___Left,
-                        size: 30,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 20),
+            child: Row(
+              children: [
+                const Padding(
+                  padding: EdgeInsets.all(5),
+                  // child: Image.asset(
+                  //   widget.categories.image,
+                  //   width: 80,
+                  //   color: Color(0xff869B4B),
+                  // ),
+                ),
+                const SizedBox(
+                  width: 15,
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      widget.categories.name.toString(),
+                      style: GoogleFonts.cairo(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
                       ),
                     ),
+                    Text(
+                      ("العدد | ${widget.categories.count}"),
+                      style: GoogleFonts.cairo(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ],
+                ),
+                Spacer(),
+                Container(
+                  alignment: Alignment.center,
+                  height: 30,
+                  width: 30,
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade300,
+                    borderRadius: BorderRadius.circular(7),
                   ),
-                ],
-              ),
+                  child: const Icon(
+                    Icons.arrow_forward_ios,
+                    color: Colors.grey,
+                  ),
+                ),
+              ],
             ),
           ),
-        ],
+        ),
       ),
     );
   }
 }
+
+
+
+
+
+/*
+ Padding(
+        padding: const EdgeInsets.only(
+          top: 15.0,
+        ),
+        child: Stack(
+          children: [
+            Container(
+              height: 150,
+
+              margin: const EdgeInsets.symmetric(horizontal: 11, vertical: 5),
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.grey.shade200),
+                borderRadius: BorderRadius.circular(12),
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.green.withOpacity(0.2),
+                    spreadRadius: 2.5,
+                    blurRadius: 7,
+                    offset: const Offset(0, 3), // changes position of shadow
+                  ),
+                ],
+              ),
+              width: MediaQuery.of(context).size.width,
+              // ignore: prefer_const_constructors
+
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(12.0),
+                child: Image.asset(
+                  '$image',
+                  fit: BoxFit.fill,
+                ),
+              ),
+            ),
+            Positioned(
+                bottom: -5,
+                right: 10,
+                child: Container(
+                  constraints: const BoxConstraints(maxWidth: 160),
+                  decoration: BoxDecoration(
+                      color: Colors.green.withOpacity(0.5),
+                      borderRadius: BorderRadius.circular(15.0)),
+                  child: Text(
+                    subtitle.toString(),
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                        wordSpacing: 2.5,
+                        letterSpacing: 1),
+                  ),
+                )),
+          ],
+        ),
+      ),
+ */

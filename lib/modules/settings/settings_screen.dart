@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:motion_toast/motion_toast.dart';
 import 'package:motion_toast/resources/arrays.dart';
@@ -55,36 +56,20 @@ class SettingsScreen extends StatelessWidget {
           textDirection: TextDirection.rtl,
           child: Scaffold(
             appBar: AppBar(
+              backgroundColor: Color(0xff869B4B),
               centerTitle: true,
               title: Text(
-                'إعدادات',
-                style: TextStyle(color: indigo),
-              ),
-              backgroundColor: Colors.white,
-              elevation: 0,
-              leading: IconButton(
-                icon: Icon(
-                  IconBroken.Arrow___Right_2,
-                  color: indigo,
-                  size: 35,
+                "الإعدادات",
+                style: GoogleFonts.cairo(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
                 ),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
               ),
-              actions: [
-                Padding(
-                  padding: const EdgeInsets.only(
-                    right: 10,
-                  ),
-                  child: InkWell(
-                      onTap: () {
-                        //   navigatorPush(context, ProfileScreen());
-                      },
-                      child: myCircleAvatar('', 21, 25, 23)),
-                ),
-              ],
             ),
+
+
+
             body: (state is! ShopLoadingGetFAQsState)
                 ? ModalProgressHUD(
                     inAsyncCall: state is ShopLoadingChangePasswordState,
@@ -97,16 +82,21 @@ class SettingsScreen extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+
+
                             Padding(
-                              padding: const EdgeInsets.only(bottom: 12.0),
+                              padding:
+                              const EdgeInsets.symmetric(vertical: 12.0),
                               child: Text(
-                                'الحساب',
-                                style: TextStyle(
-                                  color: indigo,
-                                  fontSize: 16,
+                                "الحساب",
+                                style: GoogleFonts.cairo(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w700,
+                                  color: Colors.black,
                                 ),
                               ),
                             ),
+
                             ListTile(
                               onTap: () {
                                 //   navigatorPush(context, ProfileScreen());
@@ -119,28 +109,37 @@ class SettingsScreen extends StatelessWidget {
                                   const EdgeInsets.symmetric(horizontal: 10),
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(8.0)),
-                              tileColor: Colors.grey[50],
+                              tileColor: Colors.grey.shade200,
                               leading: Icon(
                                 IconBroken.Profile,
-                                color: indigo,
+                                color: Color(0xff869B4B),
                                 size: 26,
                               ),
-                              title: const Text(
-                                ' تعديل البروفايل',
-                                style: TextStyle(
+                              title: Text(
+                                "تعديل الحساب الشخصي",
+                                style: GoogleFonts.cairo(
                                   fontSize: 14,
-                                  overflow: TextOverflow.ellipsis,
+                                  fontWeight: FontWeight.w700,
+                                  color: Colors.black,
                                 ),
                               ),
                               trailing: Icon(
                                 IconBroken.Arrow___Left_2,
-                                color: indigo,
+                                color: Color(0xff869B4B),
                                 size: 26,
                               ),
                             ),
+
+
+
+
+
                             const SizedBox(
                               height: 10.0,
                             ),
+
+
+
                             ListTile(
                               onTap: () {
                                 bottomSheetChangePassword(
@@ -154,22 +153,23 @@ class SettingsScreen extends StatelessWidget {
                                   const EdgeInsets.symmetric(horizontal: 10),
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(8.0)),
-                              tileColor: Colors.grey[50],
+                              tileColor: Colors.grey.shade200,
                               leading: Icon(
                                 IconBroken.Password,
-                                color: indigo,
+                                color: Color(0xff869B4B),
                                 size: 26,
                               ),
-                              title: const Text(
-                                ' تغيير كلمة السر',
-                                style: TextStyle(
+                              title:  Text(
+                                "تغير كلمة المرور",
+                                style: GoogleFonts.cairo(
                                   fontSize: 14,
-                                  overflow: TextOverflow.ellipsis,
+                                  fontWeight: FontWeight.w700,
+                                  color: Colors.black,
                                 ),
                               ),
                               trailing: Icon(
                                 IconBroken.Arrow___Left_2,
-                                color: indigo,
+                                color: Color(0xff869B4B),
                                 size: 26,
                               ),
                             ),
@@ -181,10 +181,11 @@ class SettingsScreen extends StatelessWidget {
                               padding:
                                   const EdgeInsets.symmetric(vertical: 12.0),
                               child: Text(
-                                'القوانين',
-                                style: TextStyle(
-                                  color: indigo,
-                                  fontSize: 16,
+                                "القوانين",
+                                style: GoogleFonts.cairo(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w700,
+                                  color: Colors.black,
                                 ),
                               ),
                             ),
@@ -198,22 +199,23 @@ class SettingsScreen extends StatelessWidget {
                                   const EdgeInsets.symmetric(horizontal: 10),
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(8.0)),
-                              tileColor: Colors.grey[50],
+                              tileColor: Colors.grey.shade200,
                               leading: Icon(
                                 IconBroken.Shield_Done,
-                                color: indigo,
+                                color: Color(0xff869B4B),
                                 size: 26,
                               ),
-                              title: const Text(
-                                'السياسات',
-                                style: TextStyle(
+                              title: Text(
+                                "السياسات",
+                                style: GoogleFonts.cairo(
                                   fontSize: 14,
-                                  overflow: TextOverflow.ellipsis,
+                                  fontWeight: FontWeight.w700,
+                                  color: Colors.black,
                                 ),
                               ),
                               trailing: Icon(
                                 IconBroken.Arrow___Left_2,
-                                color: indigo,
+                                color: Color(0xff869B4B),
                                 size: 26,
                               ),
                             ),
@@ -233,22 +235,23 @@ class SettingsScreen extends StatelessWidget {
                                   EdgeInsets.symmetric(horizontal: 10),
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(8.0)),
-                              tileColor: Colors.grey[50],
+                              tileColor: Colors.grey.shade200,
                               leading: Icon(
-                                IconBroken.Activity,
-                                color: indigo,
+                                IconBroken.Call,
+                                color: Color(0xff869B4B),
                                 size: 26,
                               ),
-                              title: const Text(
-                                ' تواصل معنا',
-                                style: TextStyle(
+                              title: Text(
+                                "تواصل معنا",
+                                style: GoogleFonts.cairo(
                                   fontSize: 14,
-                                  overflow: TextOverflow.ellipsis,
+                                  fontWeight: FontWeight.w700,
+                                  color: Colors.black,
                                 ),
                               ),
                               trailing: Icon(
                                 IconBroken.Arrow___Left_2,
-                                color: indigo,
+                                color: Color(0xff869B4B),
                                 size: 26,
                               ),
                             ),
@@ -261,34 +264,45 @@ class SettingsScreen extends StatelessWidget {
                 : const Center(
                     child: CircularProgressIndicator(),
                   ),
-            bottomNavigationBar: BottomAppBar(
-              elevation: 10,
-              color: Colors.white,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 15.0, vertical: 20.0),
-                child: gradientButton(
-                  context: context,
-                  title: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Text(
-                        'Logout',
-                        style: TextStyle(color: Colors.white, fontSize: 16),
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Icon(
-                        IconBroken.Logout,
-                        color: Colors.white,
-                      )
-                    ],
-                  ),
-                  onPressed: () {
-                    logout(context);
-                  },
+            bottomNavigationBar: Padding(
+              padding: const EdgeInsets.symmetric(
+                  horizontal: 15.0, vertical: 20.0),
+              child: Container(
+                height: 60,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: Color(0xff869B4B),
+                  borderRadius: BorderRadius.circular(10),
                 ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children:  [
+
+                    Icon(
+                      IconBroken.Logout,
+                      color: Colors.white,
+                    ),
+
+                    SizedBox(
+                      width: 5,
+                    ),
+
+                    Text(
+                      "تسجيل خروج",
+                      style: GoogleFonts.cairo(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.white,
+                      ),
+                    ),
+
+
+
+
+
+                  ],
+                ),
+
               ),
             ),
           ),
@@ -297,3 +311,24 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 }
+
+
+
+/*
+Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Text(
+                      'Logout',
+                      style: TextStyle(color: Colors.white, fontSize: 16),
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Icon(
+                      IconBroken.Logout,
+                      color: Colors.white,
+                    )
+                  ],
+                ),
+ */

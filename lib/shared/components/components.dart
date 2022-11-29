@@ -2,6 +2,7 @@ import 'dart:ffi';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:like_button/like_button.dart';
@@ -171,9 +172,9 @@ Widget titleText(
   myText,
 ) {
   return Container(
-    margin: const EdgeInsets.only(right: 20),
     child: Text(
       myText,
+      textAlign: TextAlign.center,
       style: const TextStyle(
         color: Colors.black,
         fontSize: 22,
@@ -336,12 +337,46 @@ Widget userPost() {
   );
 }
 
+
+
+
+
+Widget CairoText(String text , double fontSize , FontWeight fontWeight , Color color ) =>
+    Text(
+
+      text,
+      style:  TextStyle(
+          fontSize: fontSize,
+          color: color,
+          fontWeight: fontWeight,
+          fontFamily: 'cairo',
+      ),
+    );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // ignore: non_constant_identifier_names
-Widget ImageSlider({required List<String> imgList}) {
+Widget ImageSlider({required List<String> imgList, onPageChangedFunction}) {
+  int index = 0;
   return Container(
       constraints: const BoxConstraints(minHeight: 100, maxHeight: 250),
       child: CarouselSlider(
-        options: CarouselOptions(height: 400.0),
+        options: CarouselOptions(
+            height: 400.0,
+            viewportFraction: 1,
+            onPageChanged: onPageChangedFunction),
         items: imgList.map((i) {
           return Builder(
             builder: (BuildContext context) {
@@ -393,7 +428,6 @@ Widget likeButton() {
         size: 35,
       );
     },
-    likeCount: 665,
     countBuilder: (count, bool isLiked, String text) {
       var color = isLiked ? Colors.deepPurpleAccent : Colors.grey;
       Widget result;
@@ -491,5 +525,44 @@ Widget ratingOther() {
         print(rating);
       },
     ),
+  );
+}
+
+void showErrorDialog(BuildContext context, String message) {
+  // set up the AlertDialog
+  final CupertinoAlertDialog alert = CupertinoAlertDialog(
+    title: const Text('خطـ'),
+    content: Text('\n$message'),
+    actions: <Widget>[
+      CupertinoDialogAction(
+        isDefaultAction: true,
+        child: const Text('نعم'),
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+      )
+    ],
+  );
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
+}
+
+// ignore: non_constant_identifier_names
+CustomAppBar(String title) {
+  return AppBar(
+    title: Text(
+      title,
+      style: TextStyle(
+          color: Colors.green.shade600, fontSize: 20, letterSpacing: 1),
+    ),
+    backgroundColor: Colors.white,
+    elevation: 2,
+    centerTitle: true,
+    iconTheme: IconThemeData(color: Colors.green.shade600),
   );
 }

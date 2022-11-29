@@ -1,10 +1,14 @@
 const LOGIN = 'login';
 
-const REGISTER ='register';
+const REGISTER = 'register';
 
-const UPDATE_PROFILE ='update-profile';
+const UPDATE_PROFILE = 'update-profile';
 
 const HOME = 'home';
+
+const ADS = 'ads';
+const CATEGORY = 'categories';
+const COUNTRY = 'countries';
 
 const PRODUCT_DETAILS = 'products/1';
 

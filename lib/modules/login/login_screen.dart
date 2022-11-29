@@ -1,246 +1,139 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:lottie/lottie.dart';
-import 'package:matgar/layout/home_layout.dart';
-import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import 'package:motion_toast/motion_toast.dart';
-import 'package:motion_toast/resources/arrays.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:matgar/modules/login/otp_screen.dart';
+import 'package:matgar/shared/components/components.dart';
 
-import '../../shared/components/components.dart';
-import '../../shared/components/constants.dart';
-import '../../shared/network/local/cache_helper.dart';
-import '../../shared/styles/icon_broken.dart';
-import '../register/register_screen.dart';
-import 'cubit/cubit.dart';
-import 'cubit/states.dart';
+import '../../item/login_screen_item/country_picker.dart';
+import '../../item/login_screen_item/custom_button.dart';
 
 class LoginScreen extends StatelessWidget {
-  var formState = GlobalKey<FormState>();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  final _contactEditingController = TextEditingController();
+  var _dialCode = '';
 
+  //Login click with contact number validation
+  Future<void> clickOnLogin(BuildContext context) async {
+    if (_contactEditingController.text.isEmpty) {
+      showErrorDialog(context, 'يرجى إدخال رقمك');
+    } else {
+      await navigatorPush(context, OtpScreen());
+    }
+  }
+
+  //callback function of country picker
+
+  //Alert dialogue to show error and response
+
+  //build method for UI Representation
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (BuildContext context) => LoginCubit(),
-      child: BlocConsumer<LoginCubit, LoginStates>(
-        listener: (context, state) {
-          if (state is LoginSuccessState) {
-            if (state.loginModel.status!) {
-              print(state.loginModel.message);
-              CacheHelper.saveData(
-                      key: 'token', value: state.loginModel.user!.token)
-                  .then((value) {
-                //   print(state.loginModel.data.token);
-                print('==============================');
-                token = CacheHelper.getData(key: 'token');
-                print(token);
-                print('==============================');
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) {
-                  return Text('');
-                }));
-                MotionToast.success(
-                  title: "Success",
-                  titleStyle: TextStyle(fontWeight: FontWeight.bold),
-                  description: state.loginModel.message!,
-                  descriptionStyle: const TextStyle(
-                      //overflow: TextOverflow.ellipsis,
-                      ),
-                  animationType: ANIMATION.FROM_LEFT,
-                  position: MOTION_TOAST_POSITION.TOP,
-                  borderRadius: 10.0,
-                  width: 300,
-                  height: 65,
-                ).show(context);
-              });
-            } else {
-              print(state.loginModel.message);
-              MotionToast.error(
-                title: "خطأ",
-                titleStyle: TextStyle(fontWeight: FontWeight.bold),
-                description: state.loginModel.message!,
-                descriptionStyle: const TextStyle(
-                  overflow: TextOverflow.ellipsis,
-                ),
-                animationType: ANIMATION.FROM_LEFT,
-                position: MOTION_TOAST_POSITION.TOP,
-                borderRadius: 10.0,
-                width: 300,
-                height: 65,
-              ).show(context);
-            }
-          }
-        },
-        builder: (context, state) {
-          return ModalProgressHUD(
-            inAsyncCall: state is LoginLoadingState,
-            color: Colors.white,
-            opacity: 0.5,
-            progressIndicator: CircularProgressIndicator(),
-            child: Stack(
-              children: [
-                SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height,
-                  child: SvgPicture.asset(
-                    'assets/images/bg.svg',
-                    fit: BoxFit.cover,
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
+    return Directionality(
+      textDirection: TextDirection.rtl,
+      child: Scaffold(
+        body: Center(
+          child: SingleChildScrollView(
+            child: Container(
+              padding: const EdgeInsets.all(16.0),
+              width: double.infinity,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: screenHeight * 0.05,
                   ),
+                  SizedBox(
+                    height: screenHeight * 0.05,
+                  ),
+                  Image.asset(
+                    'assets/images/registration.png',
+                    height: screenHeight * 0.3,
+                    fit: BoxFit.contain,
+                  ),
+                  SizedBox(
+                    height: screenHeight * 0.02,
+                  ),
+                   Text(
+                    'تسجيل الدخول',
+                    style: GoogleFonts.cairo(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                  ),
+                  SizedBox(
+                    height: screenHeight * 0.02,
+                  ),
+
+
+              Text(
+                'أدخل الايميل الخاص بك لإستقبال رمز التحقق',
+                style: GoogleFonts.cairo(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.black,
                 ),
-                Directionality(
-                  textDirection: TextDirection.rtl,
-                  child: Scaffold(
-                    resizeToAvoidBottomInset: false,
-                    backgroundColor: Colors.transparent,
-                    body: AnnotatedRegion<SystemUiOverlayStyle>(
-                      value: const SystemUiOverlayStyle(
-                          statusBarColor: Colors.transparent,
-                          statusBarIconBrightness: Brightness.dark),
-                      child: Center(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                          child: Form(
-                            key: formState,
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text(
-                                  'تسجيل الدخول ',
-                                  style: TextStyle(
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Row(
-                                  children: [
-                                    const Text(
-                                      'لا تمتلك حساب ؟',
-                                      style: TextStyle(),
-                                    ),
-                                    const SizedBox(
-                                      width: 0,
-                                    ),
-                                    TextButton(
-                                        style: ButtonStyle(),
-                                        onPressed: () {
-                                          navigatorPush(
-                                              context, RegisterScreen());
-                                        },
-                                        child: Text(
-                                          'اضغط هنا',
-                                          style: TextStyle(
-                                              color: indigo,
-                                              fontWeight: FontWeight.bold),
-                                        )),
-                                  ],
-                                ),
-                                const SizedBox(
-                                  height: 20,
-                                ),
-                                TextFormField(
-                                  controller: emailController,
-                                  cursorColor: indigo,
-                                  keyboardType: TextInputType.emailAddress,
-                                  validator: (value) {
-                                    if (value!.isEmpty) {
-                                      return 'Please enter your email address';
-                                    }
-                                    return null;
-                                  },
-                                  decoration: InputDecoration(
-                                    filled: true,
-                                    fillColor: Colors.white,
-                                    labelText: 'الإيميل',
-                                    prefixIcon: const Icon(IconBroken.Message),
-                                    enabledBorder: enabledBorder,
-                                    focusedBorder: focusedBorder,
-                                    errorBorder: enabledBorder,
-                                    focusedErrorBorder: focusedBorder,
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: 20,
-                                ),
-                                TextFormField(
-                                  controller: passwordController,
-                                  cursorColor: indigo,
-                                  keyboardType: TextInputType.visiblePassword,
-                                  obscureText:
-                                      LoginCubit.get(context).isShowPassword,
-                                  validator: (value) {
-                                    if (value!.isEmpty) {
-                                      return 'Password is too short';
-                                    }
-                                    return null;
-                                  },
-                                  decoration: InputDecoration(
-                                    filled: true,
-                                    fillColor: Colors.white,
-                                    labelText: 'كلمة السر',
-                                    prefixIcon: const Icon(IconBroken.Unlock),
-                                    suffixIcon: InkWell(
-                                      onTap: () {
-                                        LoginCubit.get(context)
-                                            .changePasswordVisibility();
-                                      },
-                                      child:
-                                          LoginCubit.get(context).isShowPassword
-                                              ? const Icon(IconBroken.Hide)
-                                              : const Icon(IconBroken.Show),
-                                    ),
-                                    enabledBorder: enabledBorder,
-                                    focusedBorder: focusedBorder,
-                                    errorBorder: enabledBorder,
-                                    focusedErrorBorder: focusedBorder,
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: 30.0,
-                                ),
-                                gradientButton(
-                                    context: context,
-                                    title: const Text(
-                                      'تسجيل الدخول',
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 16),
-                                    ),
-                                    onPressed: () {
-                                      navigatorPush(
-                                          context, ShopLayoutScreen());
-                                      // if (formState.currentState!.validate()) {
-                                      //   LoginCubit.get(context).userLogin(
-                                      //       email: emailController.text,
-                                      //       password: passwordController.text);
-                                      // }
-                                    }),
-                              ],
+              ),
+
+
+                  SizedBox(
+                    height: screenHeight * 0.04,
+                  ),
+                  Container(
+                    margin: EdgeInsets.symmetric(
+                        horizontal: screenWidth > 600 ? screenWidth * 0.2 : 16),
+                    padding: const EdgeInsets.all(16.0),
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        // ignore: prefer_const_literals_to_create_immutables
+                        boxShadow: [
+                          const BoxShadow(
+                            color: Colors.grey,
+                            offset: Offset(0.0, 1.0), //(x,y)
+                            blurRadius: 6.0,
+                          ),
+                        ],
+                        borderRadius: BorderRadius.circular(16.0)),
+                    child: Column(
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.all(8),
+                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                          height: 45,
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: const Color.fromARGB(255, 253, 188, 51),
+                            ),
+                            borderRadius: BorderRadius.circular(36),
+                          ),
+                          child: Center(
+                            child: TextField(
+                              decoration:  InputDecoration(
+                                hintText: ' أدخل بريدك',
+                                border: InputBorder.none,
+                                enabledBorder: InputBorder.none,
+                                focusedBorder: InputBorder.none,
+                              ),
+                              controller: _contactEditingController,
+                              keyboardType: TextInputType.emailAddress,
                             ),
                           ),
                         ),
-                      ),
+                        const SizedBox(
+                          height: 8,
+                        ),
+                        CustomButton(clickOnLogin),
+                      ],
                     ),
-                  ),
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                        height: 150,
-                        width: 150,
-                        child: Center(
-                            child:
-                                Lottie.asset('assets/lottiefiles/sheep.json'))),
-                    const Divider()
-                  ],
-                ),
-              ],
+                  )
+                ],
+              ),
             ),
-          );
-        },
+          ),
+        ),
       ),
     );
   }

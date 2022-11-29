@@ -54,8 +54,7 @@ class IconBroken {
       IconData(0xe914, fontFamily: _fontFamily);
   static const IconData Arrow___Up_Circle =
       IconData(0xe915, fontFamily: _fontFamily);
-  static const IconData Arrow___Up_Square =
-      IconData(0xe916, fontFamily: _fontFamily);
+  static const IconData Arrow___Up_Square = IconData(0xe916, fontFamily: _fontFamily);
   static const IconData Arrow___Up = IconData(0xe917, fontFamily: _fontFamily);
   static const IconData Bag_2 = IconData(0xe918, fontFamily: _fontFamily);
   static const IconData Bag = IconData(0xe919, fontFamily: _fontFamily);

@@ -18,9 +18,25 @@ class country_Filter extends StatelessWidget {
             return Container(
               width: 50,
               height: 50,
-              decoration: const BoxDecoration(
-                color: Colors.red,
-              ),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: Colors.green.shade200)),
+              child: Row(children: [
+                Expanded(
+                    flex: 1,
+                    child: Image.asset(
+                      'assets/images/ps.png',
+                    )),
+                const Expanded(
+                    flex: 1,
+                    child: Text(
+                      'فلسطين',
+                      style: TextStyle(
+                        fontSize: 25,
+                        letterSpacing: 1,
+                      ),
+                    )),
+              ]),
             );
           },
         ),

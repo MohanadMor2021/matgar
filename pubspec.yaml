@@ -53,6 +53,11 @@ dependencies:
   like_button: ^2.0.4
   cached_network_image: ^3.2.2
   flutter_rating_bar: ^4.0.1
+#  pin_entry_text_field: ^0.1.4
+  google_fonts: ^3.0.1
+  card_swiper: ^2.0.4
+  dropdown_button2: ^1.8.8
+  flutter_screenutil: ^5.6.0
 
 dev_dependencies:
   flutter_test:
@@ -84,6 +89,8 @@ flutter:
     - assets/images/
     - assets/lottiefiles/
     - assets/video/
+    - assets/otp_icon.png
+    - assets/countrycodes.json
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 
@@ -118,10 +125,16 @@ flutter:
 
     - family: CMSansSerif
       fonts:
-        - asset: assets/fonts/cm_sans_serif_2012.ttf 
-      
+        - asset: assets/fonts/cm_sans_serif_2012.ttf
+
     - family: Shoroq
       fonts:
         - asset: assets/fonts/Shoroq.ttf
+
+    - family: cairo
+      fonts:
+        - asset: assets/fonts/cairo/Cairo-Black.ttf
+
+
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

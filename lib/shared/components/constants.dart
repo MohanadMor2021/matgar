@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-import '../../modules/login/login_screen.dart';
 import '../network/local/cache_helper.dart';
 import 'components.dart';
 
 Color teal = Color(0xff6cd8d1);
 Color blue = Color(0xff2663e3);
-Color indigo = Color(0xff6cd8d1);
+ Color indigo = Color(0xff6cd8d1);
+ // Color indigo = Color(0xff869B4B);
 Color orange = Color(0xfffea41d);
 
 Color primaryDark1 = Color(0xff171D2D);
@@ -21,6 +21,6 @@ String? token;
 
 void logout(context) {
   CacheHelper.removeData(key: 'token').then((value) {
-    navigatorReplacement(context, LoginScreen());
+    //  navigatorReplacement(context, LoginScreen());
   });
 }

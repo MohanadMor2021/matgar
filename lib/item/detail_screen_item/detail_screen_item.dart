@@ -3,7 +3,7 @@ import 'package:matgar/item/detail_screen_item/network_player_video.dart';
 import 'package:matgar/shared/components/components.dart';
 
 class DetailScreenItem extends StatelessWidget {
-  const DetailScreenItem({super.key});
+  const  DetailScreenItem({super.key});
 
   @override
   Widget build(BuildContext context) {
